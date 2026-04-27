@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: wiz-test-seunghun
+  namespace: argocd
+spec:
+  description: WIZ test Seunghun application project
+  sourceRepos:
+    - http://158.101.80.134:8080/wiz/test/wiz-test-seunghun.git
+  destinations:
+    - namespace: wiz-test-seunghun
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wiz-test-seunghun
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: wiz-test-seunghun
+    app.kubernetes.io/part-of: wiz
+spec:
+  project: wiz-test-seunghun
+  source:
+    repoURL: http://158.101.80.134:8080/wiz/test/wiz-test-seunghun.git
+    targetRevision: main
+    path: auth_system/k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: wiz-test-seunghun
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PruneLast=true
+      - ApplyOutOfSyncOnly=true
+  revisionHistoryLimit: 5

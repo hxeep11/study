@@ -1,0 +1,17 @@
+variable "compartment_id" { type = string }
+variable "tenancy_id" { type = string }
+variable "prefix" { type = string }
+variable "kubernetes_version" { type = string }
+variable "pods_cidr" { type = string }
+variable "services_cidr" { type = string }
+variable "vcn_id" { type = string }
+variable "lb_subnet_id" { type = string }
+variable "worker_subnet_id" { type = string }
+variable "api_subnet_id" { type = string }
+variable "node_shape" { type = string }
+variable "node_ocpus" { type = number }
+variable "node_memory_gb" { type = number }
+variable "node_count" { type = number }
+variable "boot_volume_size_gb" { type = number }
+variable "region" { type = string }
+variable "tags" { type = map(string) }

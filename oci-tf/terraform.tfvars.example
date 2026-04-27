@@ -1,0 +1,64 @@
+# ──────────────────────────────────────────
+# OCI Identity (필수 수정)
+# ──────────────────────────────────────────
+tenancy_ocid     = "ocid1.tenancy.oc1..xxxxxx"
+user_ocid        = "ocid1.user.oc1..xxxxxx"
+fingerprint      = "xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx"
+private_key_path = "~/.oci/oci_api_key.pem"
+region           = "ap-seoul-1"
+compartment_id   = "ocid1.compartment.oc1..xxxxxx"
+
+# ──────────────────────────────────────────
+# 리소스 이름 prefix
+# ──────────────────────────────────────────
+prefix = "oke-demo"
+
+# ──────────────────────────────────────────
+# 네트워크 CIDR
+# ──────────────────────────────────────────
+vcn_cidr            = "10.0.0.0/16"
+lb_subnet_cidr      = "10.0.10.0/24"
+worker_subnet_cidr  = "10.0.20.0/24"
+api_subnet_cidr     = "10.0.30.0/24"
+
+# Bastion 또는 VPN IP (Private API endpoint 접근 허용)
+admin_cidr = "10.0.0.0/8"
+
+# ──────────────────────────────────────────
+# OKE
+# ──────────────────────────────────────────
+kubernetes_version = "v1.29.1"
+pods_cidr          = "10.244.0.0/16"
+services_cidr      = "10.96.0.0/16"
+
+# ──────────────────────────────────────────
+# Node Pool (VM.Standard.A1.Flex - ARM)
+# ──────────────────────────────────────────
+node_shape          = "VM.Standard.A1.Flex"
+node_ocpus          = 2
+node_memory_gb      = 12
+node_count          = 2
+boot_volume_size_gb = 50
+
+# ──────────────────────────────────────────
+# Helm Chart 버전
+# ──────────────────────────────────────────
+oci_nic_chart_version = "1.3.5"
+argocd_chart_version  = "6.7.3"
+
+# ──────────────────────────────────────────
+# ArgoCD
+# ──────────────────────────────────────────
+argocd_hostname = "argocd.example.com"
+
+# ArgoCD NodePort 고정 (terraform-oci-tdf-lb Backend에 등록)
+argocd_nodeport = 32080
+
+# ──────────────────────────────────────────
+# 공통 태그
+# ──────────────────────────────────────────
+tags = {
+  managed_by  = "terraform"
+  environment = "dev"
+  project     = "oke-demo"
+}
